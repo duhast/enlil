@@ -15,6 +15,12 @@ Enki::Application.routes.draw do
     root :to => 'dashboard#show'
   end
 
+  scope '/auth' do
+    get '/:service/callback' => 'sessions#create'
+    get '/failure' => 'sessions#failure'
+    get 'logout' => 'sessions#logout', :as => :logout
+  end
+
   resources :archives, :only => [:index]
   resources :pages, :only => [:show]
 

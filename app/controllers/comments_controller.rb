@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authenticated_user_required, :only => :create
+
   include UrlHelper
   OPEN_ID_ERRORS = {
     :missing  => "Sorry, the OpenID server couldn't be found",
@@ -29,6 +31,10 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new((session[:pending_comment] || params[:comment] || {}).reject {|key, value| !Comment.protected_attribute?(key) })
     @comment.post = @post
+
+    [:name, :nick, :email, :url, :image].each do |attr|
+      @comment.send("author_#{attr}=", current_user[attr])
+    end
 
     session[:pending_comment] = nil
 

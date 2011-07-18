@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   after_save            :denormalize
   after_destroy         :denormalize
 
-  validates_presence_of :author, :body, :post
+  validates_presence_of :author_name, :body, :post
   validate :open_id_error_should_be_blank
 
   def open_id_error_should_be_blank
@@ -27,7 +27,7 @@ class Comment < ActiveRecord::Base
   end
 
   def requires_openid_authentication?
-    !!self.author.try(:index, '.')
+    false #!!self.author.try(:index, '.')
   end
 
   def trusted_user?
