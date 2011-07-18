@@ -4,5 +4,6 @@ tmp/**/*
 tmp
 config/database.yml
 db/schema.rb
+nbproject
 .bundle
 *.log
