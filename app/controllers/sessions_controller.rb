@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   protect_from_forgery :except => :create
 
+
   def create
     auth = request.env['omniauth.auth']
     set_current_user!(auth)
-    response.headers['Content-Type'] = 'application/json'
-    render :json => auth.to_json
+    render :layout => false
   end
 
   def failure
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 
   def logout
     set_current_user!(nil)
-    redirect_to '/' #:back
+    render :layout => false
   end
 
 protected

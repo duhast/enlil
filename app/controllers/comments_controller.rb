@@ -27,6 +27,15 @@ class CommentsController < ApplicationController
     end
   end
 
+  def form
+    @comment = Comment.new
+    respond_to do |format|
+      format.js do
+        render :partial => 'comment_form' #, :locals => {:comment => @comment}
+      end
+    end
+  end
+
   # TODO: Spec OpenID with cucumber and rack-my-id
   def create
     @comment = Comment.new((session[:pending_comment] || params[:comment] || {}).reject {|key, value| !Comment.protected_attribute?(key) })

@@ -1,6 +1,6 @@
 <% content_for(:head) do -%>
   <%= javascript_include_tag 'common' %>
-  <%= javascript_include_tag 'live-comment-preview' %>
+  <%= javascript_include_tag 'live-comment-preview', 'authmanager' %>
 <% end -%>
 <% content_for(:page_title) do -%>
 <%= post_title(@post) -%>
@@ -14,6 +14,7 @@
   <% end -%>
 </ol>
 <div class="related">Looking for more? Head on over to the <%= link_to("archives", archives_path) %>.</div>
+
 <h2>Post a comment</h2>
   <% unless @comment.errors.empty? -%>
   <div class="errors">
@@ -26,17 +27,23 @@
   </div>
   <% end -%>
 
-  <% unless user_signed_in? %>
-    <div class="related">
-      You must be signed in to leave a comment.<br/>
-      <%= link_to "LinkedIn", '/auth/linked_in' %>
-    </div>
-  <% else %>
-    <%= form_for([@post, @comment]) do |form| -%>
-      <div>
-        <p>Signed in as <i><%= current_user[:name] %></i> <small>(<%= link_to 'Logout', logout_path %>)</small></p>
-        <p><%= form.text_area 'body' %><br><small>(<a href="http://lesstile.rubyforge.org">lesstile enabled</a> - surround code blocks with ---)</small></p>
-        <p><%= submit_tag "Add Comment" %></p>
-      </div>
-    <% end -%>
-<% end %>
+  <div id="comment-form">
+    <%= render :partial => 'comments/comment_form' %>
+  </div>
+
+<script>
+  function reloadForm(){
+    jQuery.ajax({
+      url:  '<%= comment_form_path %>',
+      timeout: 2000,
+      dataType: 'text/html',
+      error: function() {
+        $('#comment-form').text("Failed to load form");
+      },
+      success: function(r) {
+        $('#comment-form').html(r)
+      }
+    })
+  }
+</script>
+

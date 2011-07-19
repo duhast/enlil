@@ -27,6 +27,7 @@ Enki::Application.routes.draw do
   constraints :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ do
     post ':year/:month/:day/:slug/comments' => 'comments#index'
     get ':year/:month/:day/:slug/comments/new' => 'comments#new'
+    get ':year/:month/:day/:slug/comments/form' => 'comments#form', :as => :comment_form
     get ':year/:month/:day/:slug' => 'posts#show'
   end
 

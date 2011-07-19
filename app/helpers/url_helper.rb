@@ -11,10 +11,12 @@ module UrlHelper
   end
 
   def author_link(comment)
-    if comment.author_url.blank?
-     comment.author_name
-    else
+    if !comment.author_url.blank?
       link_to(comment.author_name, comment.author_url, :class => 'openid')
+    elsif !comment.author_email.blank?
+      mail_to(comment.author_email, comment.author_name) 
+    else
+     comment.author_name
     end
   end
 end

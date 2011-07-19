@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   after_filter :set_content_type
 
   def current_user
-    session[:current_user]
+    @current_user ||= session[:current_user]
   end
 
   def user_signed_in?
