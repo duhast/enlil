@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authenticated_user_required, :only => :create
+  before_filter :authenticated_user_required, :only => [:create, :new]
 
   include UrlHelper
   OPEN_ID_ERRORS = {
@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   end
 
   def new
-    @comment = Comment.build_for_preview(params[:comment])
+    @comment = Comment.build_for_preview(params[:comment], current_user)
 
     respond_to do |format|
       format.js do
@@ -41,9 +41,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new((session[:pending_comment] || params[:comment] || {}).reject {|key, value| !Comment.protected_attribute?(key) })
     @comment.post = @post
 
-    [:name, :nick, :email, :url, :image].each do |attr|
-      @comment.send("author_#{attr}=", current_user[attr])
-    end
+    @comment.set_author_info(current_user)
 
     session[:pending_comment] = nil
 

@@ -60,6 +60,13 @@ class Comment < ActiveRecord::Base
     post.title
   end
 
+  def set_author_info(user_hash)
+    [:name, :nick, :email, :url, :image, :auth_provider, :auth_uid].each do |attr|
+      self.send("author_#{attr}=", user_hash[attr])
+    end
+  end
+
+
   class << self
     def protected_attribute?(attribute)
       [:author, :body].include?(attribute.to_sym)
@@ -72,8 +79,9 @@ class Comment < ActiveRecord::Base
       comment
     end
 
-    def build_for_preview(params)
+    def build_for_preview(params, author_hash)
       comment = Comment.new_with_filter(params)
+      comment.set_author_info(author_hash)
       if comment.requires_openid_authentication?
         comment.author_url = comment.author
         comment.author     = "Your OpenID Name"

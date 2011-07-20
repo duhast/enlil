@@ -256,8 +256,23 @@ textarea
 
 #new_comment textarea, #edit_comment textarea
 {
-  height: 150px;
+  height: 250px;
+  width: 100%;
 }
+
+.avatar {
+    float: left;
+    margin-right: 10px;
+}
+
+.avatar img {
+    border: none;
+}
+
+.comment-body {
+    min-height: 100px;
+}
+
 
 .alt, .container_alt
 {

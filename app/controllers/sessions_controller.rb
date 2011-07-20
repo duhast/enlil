@@ -4,12 +4,16 @@ class SessionsController < ApplicationController
 
   def create
     auth = request.env['omniauth.auth']
-    set_current_user!(auth)
-    render :layout => false
+    unless auth
+      redirect_to :failure
+    else
+      set_current_user!(auth)
+      render :layout => false
+    end
   end
 
   def failure
-    render :text => 'fail'
+    render :logout, :layout => false, :locals => {:error => params[:error] || 'Error while signing in'}
   end
 
   def logout
@@ -25,10 +29,12 @@ protected
   def build_current_user(auth_hash)
     {
       :name => auth_hash['user_info']['name'],
-      :nick => auth_hash['nickname'],
+      :nick => auth_hash['user_info']['nickname'],
       :email => '',
       :url => auth_hash['public_profile_url'],
-      :image => auth_hash['image']
+      :image => auth_hash['user_info']['image'],
+      :auth_uid => auth_hash['uid'],
+      :auth_provider => auth_hash['provider']
     }
   end
   
