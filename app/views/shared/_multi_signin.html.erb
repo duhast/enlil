@@ -1,4 +1,6 @@
-Sign in via
-<% [:linked_in, :facebook, :google].each do |service| %>
-  <%= link_to_function image_tag("#{service}_icon.png"), "authmanager.login('#{service}', #{js_callback || 'null'});"%>
-<% end %>
+<div id="multilogin-box">
+  <span>Sign in via</span>
+  <% [:linked_in, :facebook, :google].each do |service| %>
+    <%= link_to_function image_tag("#{service}_icon.png"), "authmanager.login('#{service}', #{js_callback})"%>
+  <% end %>
+</div>

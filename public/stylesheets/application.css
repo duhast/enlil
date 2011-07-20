@@ -71,13 +71,6 @@ strong
   color: #333333;
 }
 /* Links */
-.openid
-{
-  background-image: url("/images/openid_icon.png");
-  padding-left: 15px;
-  background-repeat: no-repeat;
-  background-position: 0px 2px;
-}
 
 a 
 {
@@ -178,6 +171,24 @@ div.meta
  margin-top: 1em;
  margin-bottom: 3em; 
 }
+
+/* Common elements */
+
+#multilogin-box {
+    text-align: left;
+    padding: 10px 10px 10px 10px;
+    background-color: #eaeaea;
+    border: dashed beige 2px;
+}
+
+#multilogin-box img {
+    padding-left: 2px;
+    border: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
 /* Formatting */   
 
 .meta ul

@@ -1,0 +1,11 @@
+<h1><%= link_to(enki_config[:title], '/') %></h1>
+<% if flash[:error] %><p><%= flash[:error] %></p><% end %>
+
+<h2>Stop! Who are you?</h2>
+<%= render :partial => 'shared/multi_signin', :locals => {:js_callback => 'proceed'} %>
+
+<script>
+  function proceed(){
+    window.location = "<%= admin_root_path %>";
+  }
+</script>

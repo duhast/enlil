@@ -1,7 +1,6 @@
 Enki::Application.routes.draw do
   namespace 'admin' do
-    resource :session
-
+    get 'login' => 'base#login'
     resources :posts, :pages do
       post 'preview', :on => :collection
     end

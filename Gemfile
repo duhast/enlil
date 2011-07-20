@@ -9,8 +9,6 @@ gem 'mysql2', '0.2.7'
 
 # Bundle the extra gems:
 gem 'RedCloth', :require => 'redcloth'
-gem 'ruby-openid', :require => 'openid'
-gem 'rack-openid', :require => 'rack/openid'
 gem 'aaronh-chronic', :require => 'chronic' # Fixes for 1.9.2
 gem 'coderay'
 gem 'lesstile'
