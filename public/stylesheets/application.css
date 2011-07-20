@@ -266,11 +266,17 @@ textarea
 }
 
 .avatar img {
-    border: none;
+    border: 2px solid #ddd;
+    padding: 2px; /*Inner border size*/
+    background: #fff; /*Inner border color*/
 }
 
 .comment-body {
     min-height: 100px;
+}
+
+.comment-body .author-name {
+    font-style: italic;
 }
 
 
