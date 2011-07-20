@@ -21,7 +21,7 @@
     <h3>Comment not added!</h3>
     <ul>
       <% @comment.errors.sort_by(&:first).each do |error| -%>
-        <li><%= format_comment_error(error) %></li>
+        <li><%= error %></li>
       <% end -%>
     </ul>
   </div>

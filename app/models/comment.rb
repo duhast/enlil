@@ -8,6 +8,8 @@ class Comment < ActiveRecord::Base
   after_destroy         :denormalize
 
   validates :author_name, :presence => true
+  #validates :author_email, :presence => true
+  #validates :author_url, :presence => true, :allow_blank => true
   validates :body, :presence => true
   validates :post, :presence => true
 
@@ -55,10 +57,6 @@ class Comment < ActiveRecord::Base
     def build_for_preview(params, author_hash)
       comment = Comment.new_with_filter(params)
       comment.set_author_info(author_hash)
-      if comment.requires_openid_authentication?
-        comment.author_url = comment.author
-        comment.author     = "Your OpenID Name"
-      end
       comment
     end
 
