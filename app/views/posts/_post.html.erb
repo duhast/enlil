@@ -10,5 +10,5 @@
       <li class="tags">Tagged <%= linked_tag_list(post.tags) %></li>
     <% end -%>
   </ul>
-  <%= render :partial => 'shared/share_link' %>
+  <%= render :partial => 'shared/share_link' if defined?(share_buttons) && share_buttons %>
 </div>
