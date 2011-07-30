@@ -13,7 +13,7 @@ body
     background: url("/images/frame_top.png") repeat scroll 0 0 transparent;
     height: 53px;
     margin: 30px auto 0;
-    width: 719px;
+    width: 1000px;
 }
 
 #frame_bottom {
@@ -24,7 +24,7 @@ body
     line-height: 1.5em;
     margin: 0 auto 0;
     text-align: center;
-    width: 719px;
+    width: 1000px;
 }
 
 #frame_bottom #space {
@@ -36,20 +36,19 @@ body
     background: url("/images/frame_mid.png") repeat scroll 0 0 transparent;
     margin: 0 auto;
     text-align: left;
-    width: 719px;
+    width: 1000px;
 }
 
 #content {
-    margin: 0 10px 0 30px;
+    margin: 0 25px 0 25px;
     padding: 5px 0 10px;
-    width: 655px;
+    width: 945px;
 }
 
 #main_header {
     background-image: url("/images/header.jpg");
     background-repeat: no-repeat;
     height: 200px;
-    margin: 0 auto;
     padding: 0;
     position: relative;
     text-align: left;
@@ -148,11 +147,8 @@ img
 /* Two columns */
 #navigation 
 {
-  position: absolute;
+  float: right;
   width: 15em;
-  top: -1px; 
-  right: -1px;
-
   border: none;
   padding: 5px;
 }
@@ -205,9 +201,7 @@ img
 
 #main 
 {
-  padding-right: 150px;
-  padding-left: 0px;
-  padding-top: 0px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 

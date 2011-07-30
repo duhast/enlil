@@ -13,15 +13,6 @@
   <div id="frame_top"></div>
   <div id="page_container">
     <div id="content">
-      <div id="main_header">
-        <div id="header_content">
-          <h1 id="page_heading"><a href="<%= root_url %>"><%= enki_config[:title] %></a></h1>
-        </div>
-      </div>
-
-      <div id="main">
-        <%= yield %>
-      </div>
 
       <div id="navigation">
         <h2>Pages</h2>
@@ -47,6 +38,17 @@
           </div>
         </form>
       </div>
+
+      <div id="main_header">
+        <div id="header_content">
+          <h1 id="page_heading"><a href="<%= root_url %>"><%= enki_config[:title] %></a></h1>
+        </div>
+      </div>
+
+    <div id="main">
+      <%= yield %>
+    </div>
+
 
     </div>
   </div>
