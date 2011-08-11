@@ -2,10 +2,14 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.4'
 
+#TODO Add gravatars for people with no image
+#TODO Add keywords
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '0.2.7'
+gem 'exception_notification'
 
 # Bundle the extra gems:
 gem 'RedCloth', :require => 'redcloth'
@@ -27,5 +31,5 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'hpricot'
-  gem 'rake', '0.9.2'
+  #gem 'rake', '0.9.2'
 end
