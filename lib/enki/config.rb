@@ -12,8 +12,8 @@ module Enki
       }
     end
 
-    def author_open_ids
-      [self[:author, :open_id]].flatten.map {|uri| URI.parse(uri)}
+    def author_auths
+      self[:author, :auths]
     end
 
     def self.default
@@ -21,14 +21,18 @@ module Enki
     end
 
     def self.default_location
-      "#{Rails.root}/config/enki.yml"
+      "#{Rails.root}/config/enlil.yml"
     end
 
     private
 
     def symbolize_keys(hash)
       hash.inject({}) do |options, (key, value)|
-        options[(key.to_sym rescue key) || key] = value.is_a?(Hash) ? symbolize_keys(value) : value
+        options[(key.to_sym rescue key) || key] = case value
+          when Hash then symbolize_keys(value)
+          when Array then value.map{|item| symbolize_keys(item) }
+          else value
+        end
         options
       end
     end

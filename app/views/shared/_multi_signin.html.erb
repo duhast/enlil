@@ -1,0 +1,6 @@
+<div id="multilogin-box">
+  <span>Sign in via</span>
+  <% [:facebook, :twitter, :linked_in, :google, :github, :vkontakte, :mailru, :yahoo, :openid, :myopenid].each do |service| %>
+    <%= link_to_function image_tag("#{service}_icon.png", :title => service.to_s.humanize), "authmanager.login('#{service}', #{js_callback})"%>
+  <% end %>
+</div>

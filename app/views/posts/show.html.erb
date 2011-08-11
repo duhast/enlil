@@ -1,6 +1,6 @@
 <% content_for(:head) do -%>
   <%= javascript_include_tag 'common' %>
-  <%= javascript_include_tag 'live-comment-preview' %>
+  <%= javascript_include_tag 'live-comment-preview', 'authmanager' %>
 <% end -%>
 <% content_for(:page_title) do -%>
 <%= post_title(@post) -%>
@@ -15,21 +15,36 @@
   <% end -%>
 </ol>
 <div class="related">Looking for more? Head on over to the <%= link_to("archives", archives_path) %>.</div>
+
 <h2>Post a comment</h2>
   <% unless @comment.errors.empty? -%>
   <div class="errors">
     <h3>Comment not added!</h3>
     <ul>
       <% @comment.errors.sort_by(&:first).each do |error| -%>
-        <li><%= format_comment_error(error) %></li>
+        <li><%= error %></li>
       <% end -%>
     </ul>
   </div>
   <% end -%>
-<%= form_for([@post, @comment]) do |form| -%>
-  <div>
-    <p><%= form.text_field 'author' %><label for="comment_author"><small>Name or <a href="http://openidexplained.com/">OpenID</a> (required)</small></label></p>
-    <p><%= form.text_area 'body' %><br><small>(<a href="http://lesstile.rubyforge.org">lesstile enabled</a> - surround code blocks with ---)</small></p>
-    <p><%= submit_tag "Add Comment" %></p>
+
+  <div id="comment-form">
+    <%= render :partial => 'comments/comment_form' %>
   </div>
-<% end -%>
+
+<script>
+  function reloadForm(){
+    jQuery.ajax({
+      url:  '<%= comment_form_path %>',
+      timeout: 2000,
+      dataType: 'text/html',
+      error: function() {
+        $('#comment-form').text("Failed to load form");
+      },
+      success: function(r) {
+        $('#comment-form').html(r)
+      }
+    })
+  }
+</script>
+

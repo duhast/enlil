@@ -1,0 +1,12 @@
+# Configuration options for your blog - customise to taste
+# This file contains no secret information, so can be stored in source control (unlike database.yml)
+title: My Enki Blog
+url:   http://enkiblog.com
+author:
+  name:    Don Alias        # For copyright notice and ATOM feeds
+  email:   sfsdf # Exception emails will go here, and it is used in ATOM feeds
+  auths:                  # These are used to login to the admin area
+    - uid: mGDZdbdBeB
+      provider: linked_in
+    - uid: https://www.google.com/accounts/o8/id?id=AItOawlC6-gf25EVYTAJQ8GCP1LZby9BtWGcy_U
+      provider: google

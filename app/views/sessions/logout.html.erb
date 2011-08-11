@@ -1,0 +1,9 @@
+<%= javascript_include_tag 'authmanager' %>
+
+<script>
+  <% if defined?(error) %>
+    alert('<%= error %>');
+  <% end %>
+  auth_popup.logged_in = false;
+  auth_popup.close();
+</script>

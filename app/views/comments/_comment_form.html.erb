@@ -1,0 +1,14 @@
+<% unless user_signed_in? %>
+  <div class="related">
+    Please sign in to leave a comment.<br/>
+    <%= render :partial => 'shared/multi_signin', :locals => {:js_callback => 'reloadForm'} %>
+  </div>
+<% else %>
+  <%= form_for([@post, @comment]) do |form| -%>
+    <div>
+      <p>Signed in as <i><%= current_user[:name] %></i> <small>(<%= link_to_function 'Logout', 'authmanager.logout(reloadForm)' %>)</small></p>
+      <p><%= form.text_area 'body' %><br/><small>(<a href="http://lesstile.rubyforge.org">lesstile enabled</a> - surround code blocks with ---)</small></p>
+      <p><%= submit_tag "Add Comment" %></p>
+    </div>
+  <% end -%>
+<% end %>

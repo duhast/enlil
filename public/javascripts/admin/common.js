@@ -107,3 +107,7 @@ function destroyAndUndoBehaviour(type) {
   }
 }
 
+function onLogout(){
+  window.location = '/';
+}
+

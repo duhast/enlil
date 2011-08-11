@@ -1,7 +1,6 @@
 Enki::Application.routes.draw do
   namespace 'admin' do
-    resource :session
-
+    get 'login' => 'base#login'
     resources :posts, :pages do
       post 'preview', :on => :collection
     end
@@ -15,6 +14,13 @@ Enki::Application.routes.draw do
     root :to => 'dashboard#show'
   end
 
+  scope :path => '/auth' do
+    #get ':service/callback' => 'sessions#create'
+    get 'failure' => 'sessions#failure'
+    get 'logout' => 'sessions#logout', :as => :logout
+  end
+  match '/auth/:service/callback' => 'sessions#create'
+
   resources :archives, :only => [:index]
   resources :pages, :only => [:show]
 
@@ -22,6 +28,7 @@ Enki::Application.routes.draw do
     get ':year/:month/:day/:slug/comments'  => 'comments#index'
     post ':year/:month/:day/:slug/comments' => 'comments#create'
     get ':year/:month/:day/:slug/comments/new' => 'comments#new'
+    get ':year/:month/:day/:slug/comments/form' => 'comments#form', :as => :comment_form
     get ':year/:month/:day/:slug' => 'posts#show'
   end
 

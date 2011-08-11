@@ -1,47 +1,20 @@
 class Comment < ActiveRecord::Base
   DEFAULT_LIMIT = 15
 
-  attr_accessor         :openid_error
-  attr_accessor         :openid_valid
-
   belongs_to            :post
 
   before_save           :apply_filter
   after_save            :denormalize
   after_destroy         :denormalize
 
-  validates_presence_of :author, :body, :post
-  validate :open_id_error_should_be_blank
-
-  alias_attribute :author, :author_name
-
-  def open_id_error_should_be_blank
-    errors.add(:base, openid_error) unless openid_error.blank?
-  end
+  validates :author_name, :presence => true
+  #validates :author_email, :presence => true
+  #validates :author_url, :presence => true, :allow_blank => true
+  validates :body, :presence => true
+  validates :post, :presence => true
 
   def apply_filter
     self.body_html = Lesstile.format_as_xhtml(self.body, :code_formatter => Lesstile::CodeRayFormatter)
-  end
-
-  def blank_openid_fields
-    self.author_url = ""
-    self.author_email = ""
-  end
-
-  def requires_openid_authentication?
-    !!self.author.try(:index, '.')
-  end
-
-  def trusted_user?
-    false
-  end
-
-  def user_logged_in?
-    false
-  end
-
-  def approved?
-    true
   end
 
   def denormalize
@@ -62,6 +35,13 @@ class Comment < ActiveRecord::Base
     post.title
   end
 
+  def set_author_info(user_hash)
+    [:name, :nick, :email, :url, :image, :auth_provider, :auth_uid].each do |attr|
+      self.send("author_#{attr}=", user_hash[attr])
+    end
+  end
+
+
   class << self
     def protected_attribute?(attribute)
       [:author, :body].include?(attribute.to_sym)
@@ -74,12 +54,9 @@ class Comment < ActiveRecord::Base
       comment
     end
 
-    def build_for_preview(params)
+    def build_for_preview(params, author_hash)
       comment = Comment.new_with_filter(params)
-      if comment.requires_openid_authentication?
-        comment.author_url = comment.author
-        comment.author     = "Your OpenID Name"
-      end
+      comment.set_author_info(author_hash)
       comment
     end
 
