@@ -2,40 +2,77 @@
 body 
 { 
   color: black;
-  
+  background-image: url("/images/wallpaper.jpg");
   font: normal 12px verdana, arial, helvetica, sans-serif;
   line-height: 1.5;
   padding: 0px;
   margin: 0px;
 }
 
+#frame_top {
+    background: url("/images/frame_top.png") repeat scroll 0 0 transparent;
+    height: 53px;
+    margin: 30px auto 0;
+    width: 1000px;
+}
+
+#frame_bottom {
+    background-image: url("/images/frame_bottom.png");
+    color: #FFFFFF;
+    font-size: 0.9em;
+    height: 53px;
+    line-height: 1.5em;
+    margin: 0 auto 0;
+    text-align: center;
+    width: 1000px;
+}
+
+#frame_bottom #space {
+    padding-top: 20px;
+}
+
 #page_container
 {
-  position: absolute;
-  min-height: 400px;
-  
-  color: black;
-	width: 100%;
+    background: url("/images/frame_mid.png") repeat scroll 0 0 transparent;
+    margin: 0 auto;
+    text-align: left;
+    width: 1000px;
 }
 
 #content {
-	width: 900px;
-  margin: 5px auto;
-	position: relative;
-	padding-right: 55px;
-/*	display: inline;*/
+    margin: 0 25px 0 25px;
+    padding: 5px 0 10px;
+    width: 945px;
+}
+
+#main_header {
+    background-image: url("/images/header.jpg");
+    background-repeat: no-repeat;
+    height: 200px;
+    padding: 0;
+    position: relative;
+    text-align: left;
+    width: 658px;
+}
+
+#main_header h1, h1 a, h1 a:hover, h1 a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Trebuchet MS',Verdana,Sans-Serif;
+    font-size: 1em;
+    letter-spacing: -2px;
+}
+
+#header_content {
+    padding: 95px 0 0 30px;
 }
 
 #footer
 {
-  position: relative;
-  font-size: 8pt;
-/*  padding-top: 5px;*/
-  padding-right: 15px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  color: gray;
-/*  border-bottom: solid 1px #aaaaaa;*/
+    color: #FFFFFF;
+    font-size: 0.9em;
+    line-height: 1.5em;
+    text-align: center;
 }
 
 #social-share-buttons {
@@ -127,11 +164,8 @@ img
 /* Two columns */
 #navigation 
 {
-  position: absolute;
+  float: right;
   width: 15em;
-  top: -1px; 
-  right: -1px;
-
   border: none;
   padding: 5px;
 }
@@ -184,9 +218,7 @@ img
 
 #main 
 {
-  padding-right: 150px;
-  padding-left: 0px;
-  padding-top: 0px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
