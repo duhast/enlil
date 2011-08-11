@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  DEFAULT_LIMIT = 15
+  @per_page = 5
 
   acts_as_taggable
 
@@ -52,13 +52,12 @@ class Post < ActiveRecord::Base
       tag = options.delete(:tag)
       options = {
         :order      => 'posts.published_at DESC',
-        :conditions => ['published_at < ?', Time.zone.now],
-        :limit      => DEFAULT_LIMIT
+        :conditions => ['published_at < ?', Time.zone.now]
       }.merge(options)
       if tag
-        find_tagged_with(tag, options)
+        paginate_by_tag(tag, options)
       else
-        find(:all, options)
+        paginate(:all, options)
       end
     end
 
