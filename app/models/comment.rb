@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :author, :body, :post
   validate :open_id_error_should_be_blank
 
-  alias_attribute(:author, :author_name)
+  alias_attribute :author, :author_name
 
   def open_id_error_should_be_blank
     errors.add(:base, openid_error) unless openid_error.blank?
@@ -29,9 +29,7 @@ class Comment < ActiveRecord::Base
   end
 
   def requires_openid_authentication?
-    return false unless author
-
-    !!(author =~ %r{^https?://} || author.index('.'))
+    !!self.author.try(:index, '.')
   end
 
   def trusted_user?

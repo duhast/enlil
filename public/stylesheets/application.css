@@ -38,6 +38,23 @@ body
 /*  border-bottom: solid 1px #aaaaaa;*/
 }
 
+#social-share-buttons {
+    padding-top: 5px;
+    color: #CCCCCC;
+    font-size: 9pt;
+    height: 40px;
+}
+
+#social-share-buttons .prompt {
+    float: left;
+    padding-right: 20px;
+    padding-top: 3px;
+}
+
+#social-share-buttons .buttons {
+    float: right;
+}
+
 /* Headings */
 h1#page_heading
 {
