@@ -55,9 +55,17 @@ class Post < ActiveRecord::Base
         :conditions => ['published_at < ?', Time.zone.now]
       }.merge(options)
       if tag
-        paginate_by_tag(tag, options)
+        if options[:page]
+          paginate_by_tag(tag, options)
+        else
+          find_tagged_with(tag, options)
+        end
       else
-        paginate(:all, options)
+        if options[:page]
+          paginate(:all, options)
+        else
+          find(:all, options)
+        end
       end
     end
 
