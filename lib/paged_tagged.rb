@@ -11,12 +11,13 @@ module ActiveRecord
         # tag is the tag to find
         # options is the option to use for pagination (:page, :per_page) and for find_tagged_with
         def paginate_by_tag(tag, options = {})
-          options, page, per_page = wp_parse_options!(options)
+          page, per_page = (options.delete(:page) || 1), (options.delete(:per_page) || self.per_page)
+          options.delete(:total_entries)
           offset = (page.to_i - 1) * per_page
           options.merge!(:offset => offset, :limit => per_page.to_i)
           items = find_tagged_with(tag, options)
           count = tagging_counts(tag)
-          returning WillPaginate::Collection.new(page, per_page, count) do |p|
+          WillPaginate::Collection.new(page, per_page, count).tap do |p|
             p.replace items
           end
         end
